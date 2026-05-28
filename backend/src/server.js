@@ -6,7 +6,8 @@ const path = require('path');
 
 const PORT = process.env.PORT || 5000;
 
-const uploadsDir = path.join(__dirname, '../uploads');
+// Resolve uploads dir relative to repo root regardless of where server.js is called from
+const uploadsDir = path.resolve(__dirname, '../../uploads');
 if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
 
 const publishScheduledPosts = async () => {

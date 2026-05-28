@@ -26,8 +26,9 @@ app.get('/api/health', (req, res) => res.json({ status: 'ok', timestamp: new Dat
 
 // Serve built React frontend in production
 if (isProduction) {
-  const frontendBuild = path.join(__dirname, '../../frontend/dist');
+  const frontendBuild = path.resolve(__dirname, '../../frontend/dist');
   app.use(express.static(frontendBuild));
+  // All non-API routes serve the React app
   app.get('*', (req, res) => {
     res.sendFile(path.join(frontendBuild, 'index.html'));
   });
